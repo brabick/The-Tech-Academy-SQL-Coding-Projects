@@ -1,5 +1,5 @@
-CREATE DATABASE db_FinalProject
-USE db_FinalProject
+CREATE DATABASE db_FinalProject2
+USE db_FinalProject2
 
 --Creating all tables
 CREATE TABLE tbl_library_branch (
@@ -31,6 +31,13 @@ CREATE TABLE tbl_book_copies (
 	Number_Of_Copies INT NOT NULL
 );
 
+CREATE TABLE tbl_borrower (
+	CardNo INT PRIMARY KEY NOT NULL IDENTITY (200, 1),
+	Name VARCHAR(50) NOT NULL,
+	Address VARCHAR(50) NOT NULL,
+	Phone VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE tbl_book_loans (
 	BookID INT NOT NULL CONSTRAINT fk_bookid3 FOREIGN KEY REFERENCES tbl_books(BookID) ON UPDATE CASCADE ON DELETE CASCADE,
 	BranchID INT NOT NULL CONSTRAINT fk_branchid2 FOREIGN KEY REFERENCES tbl_library_branch(BranchID) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -40,12 +47,7 @@ CREATE TABLE tbl_book_loans (
 );
 
 
-CREATE TABLE tbl_borrower (
-	CardNo INT PRIMARY KEY NOT NULL IDENTITY (200, 1),
-	Name VARCHAR(50) NOT NULL,
-	Address VARCHAR(50) NOT NULL,
-	Phone VARCHAR(50) NOT NULL
-);
+
 
 --Finished with tables
 --Adding data to tables
@@ -58,6 +60,7 @@ INSERT INTO tbl_library_branch
 	('Central', '5678 Thumbstraighton Lane')
 ;
 
+
 INSERT INTO tbl_library_branch
 	(BranchName, Address)
 	VALUES
@@ -67,6 +70,26 @@ INSERT INTO tbl_library_branch
 
 
 --Finished adding to library branch table
+
+--Inserting into publisher table
+INSERT INTO tbl_publisher 
+	(PublisherName, Address, Phone)
+	VALUES
+	('Weaver Bickerton', '155 S Inca', '315-922-1874')
+;
+
+INSERT INTO tbl_publisher 
+	(PublisherName, Address, Phone)
+	VALUES
+	('Penguin', '222 W Wallaby', '555-896-1111'),
+	('Hail the King', '69 Hippity Hop Road', '333-121-9896'),
+	('Richardsons Son', '4451 Running Lane', '446-898-6321')
+
+;
+SELECT * FROM tbl_books
+
+--Finished inserting into publisher table
+
 --Inserting into books table
 INSERT INTO tbl_books
 	(Title, PublisherName)
@@ -114,56 +137,40 @@ INSERT INTO tbl_books
 	('The Lost Tribe', 'Weaver Bickerton')
 ;
 
---Finished inserting into books table
---Inserting into publisher table
-INSERT INTO tbl_publisher 
-	(PublisherName, Address, Phone)
-	VALUES
-	('Weaver Bickerton', '155 S Inca', '315-922-1874')
-;
-
-INSERT INTO tbl_publisher 
-	(PublisherName, Address, Phone)
-	VALUES
-	('Penguin', '222 W Wallaby', '555-896-1111'),
-	('Hail the King', '69 Hippity Hop Road', '333-121-9896'),
-	('Richardsons Son', '4451 Running Lane', '446-898-6321')
-
-;
 SELECT * FROM tbl_books
+--Finished inserting into books table
 
---Finished inserting into publisher table
 --Inserting into Book Authors table
 
 INSERT INTO tbl_book_authors
 	(BookID, AuthorName)
 	VALUES
+	(1, 'Todoroki Miller'),
 	(2, 'Todoroki Miller'),
-	(3, 'Todoroki Miller'),
+	(3, 'Rubics Cube'),
 	(4, 'Rubics Cube'),
-	(5, 'Rubics Cube'),
+	(5, 'Long Bastion'),
 	(6, 'Long Bastion'),
-	(7, 'Long Bastion'),
+	(7, 'Hippo del Pippo'),
 	(8, 'Hippo del Pippo'),
-	(9, 'Hippo del Pippo'),
-	(10, 'Stephen King'),
-	(11, 'Stephen King' ),
+	(9, 'Stephen King'),
+	(10, 'Stephen King' ),
+	(11, 'Sara Green'),
 	(12, 'Sara Green'),
-	(13, 'Sara Green'),
+	(13, 'Ranch Longbottom'),
 	(14, 'Ranch Longbottom'),
-	(15, 'Ranch Longbottom'),
+	(15, 'Pepper Spice'),
 	(16, 'Pepper Spice'),
-	(17, 'Pepper Spice'),
+	(17, 'Lin Troller'),
 	(18, 'Lin Troller'),
-	(19, 'Lin Troller'),
-	(20, 'Bam Boozle'),
-	(21, 'Bam Boozle')
+	(19, 'Bam Boozle'),
+	(20, 'Bam Boozle')
 ;
 
 INSERT INTO tbl_book_authors
 	(BookID, AuthorName)
 	VALUES
-	(22, 'Mark W. Lee')
+	(21, 'Mark W. Lee')
 ;
 
 --Finished Inserting Into Book Authors Table
@@ -201,8 +208,8 @@ INSERT INTO tbl_book_copies
 INSERT INTO tbl_book_copies
 	(BookID, BranchID, Number_Of_Copies)
 	VALUES
-	(10, 101, 2),
-	(11, 101, 2)
+	(9, 101, 2),
+	(10, 101, 2)
 ;
 
 INSERT INTO tbl_book_copies
@@ -230,6 +237,13 @@ INSERT INTO tbl_book_copies
 	(20, 101, 2),
 	(21, 101, 2)
 ;
+
+INSERT INTO tbl_book_copies
+	(BookID, BranchID, Number_Of_Copies)
+	VALUES
+	(21, 100, 5)
+;
+
 
 INSERT INTO tbl_book_copies
 	(BookID, BranchID, Number_Of_Copies)
@@ -263,7 +277,7 @@ INSERT INTO tbl_book_copies
 INSERT INTO tbl_book_copies
 	(BookID, BranchID, Number_Of_Copies)
 	VALUES
-	(22, 100, 3)
+	(2, 100, 3)
 ;
 
 SELECT * FROM tbl_library_branch
